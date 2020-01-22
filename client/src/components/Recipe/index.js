@@ -1,10 +1,4 @@
-import React from 'react';
+import RecipeCreate from './RecipeCreate';
+import Recipes from './Recipes';
 
-
-
-
-const Recipe =()=> {
-    return <span>12345677889</span>
-}
-
-export default Recipe;
+export { RecipeCreate, Recipes };

@@ -3,11 +3,12 @@ import { Router, Route } from 'react-router-dom';
 
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
+import LandingPage2 from '../Landing2';
+
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
-import Recipe from '../Recipe'
 import withSession from '../Session/withSession';
 
 import * as routes from '../../constants/routes';
@@ -44,11 +45,6 @@ const App = ({ session, refetch }) => (
         exact
         path={routes.ADMIN}
         component={() => <AdminPage />}
-      />
-            <Route
-        exact
-        path={routes.RECIPE}
-        component={() => <Recipe />}
       />
     </div>
   </Router>

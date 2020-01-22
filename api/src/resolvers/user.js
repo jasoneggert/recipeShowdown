@@ -48,6 +48,7 @@ export default {
       { login, password },
       { models, secret },
     ) => {
+      console.log('login: ', login);
       const user = await models.User.findByLogin(login);
 
       if (!user) {

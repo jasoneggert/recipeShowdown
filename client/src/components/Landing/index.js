@@ -2,14 +2,14 @@ import React from 'react';
 
 import withSession from '../Session/withSession';
 
-import { MessageCreate, Messages } from '../Message';
+import { RecipeCreate, Recipes } from '../Recipe';
 
 const Landing = ({ session }) => (
   <div>
-    <h2>Landing Page</h2>
+    <h2>Recipes</h2>
 
-    {session && session.me && <MessageCreate />}
-    <Messages limit={2} />
+    {session && session.me && <RecipeCreate />}
+    <Recipes limit={30} />
   </div>
 );
 

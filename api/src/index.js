@@ -82,7 +82,6 @@ const server = new ApolloServer({
 });
 
 server.applyMiddleware({ app, path: '/graphql' });
-console.log(server.context);
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
@@ -118,27 +117,27 @@ const createUsersWithMessages = async date => {
     password: 'ddavids',
   });
 
-  const message1 = new models.Message({
-    text: 'Published the Road to learn React',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-    userId: user1.id,
-  });
-
-  const message2 = new models.Message({
-    text: 'Happy to release ...',
+  const recipe1 = new models.Message({
+    text: '3 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     userId: user2.id,
   });
 
-  const message3 = new models.Message({
-    text: 'Published a complete ...',
+  const recipe2 = new models.Message({
+    text: '3 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     userId: user2.id,
   });
 
-  await message1.save();
-  await message2.save();
-  await message3.save();
+  const recipe3 = new models.Message({
+    text: '3 sticks of butter',
+    createdAt: date.setSeconds(date.getSeconds() + 1),
+    userId: user2.id,
+  });
+
+  await recipe1.save();
+  await recipe2.save();
+  await recipe3.save();
 
   await user1.save();
   await user2.save();
