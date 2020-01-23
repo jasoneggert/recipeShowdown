@@ -7,6 +7,10 @@ export const GET_ME = gql`
       username
       email
       role
+      recipes {
+        id
+        text
+      }
     }
   }
 `;

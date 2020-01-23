@@ -4,9 +4,12 @@ import { GET_ME } from './queries';
 
 const withSession = Component => props => (
   <Query query={GET_ME}>
-    {({ data, refetch }) => (
-      <Component {...props} session={data} refetch={refetch} />
-    )}
+    {({ data, refetch }) => {
+      console.log(data);
+      return (
+        <Component {...props} session={data} refetch={refetch} />
+      );
+    }}
   </Query>
 );
 

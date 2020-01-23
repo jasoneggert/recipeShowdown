@@ -98,5 +98,10 @@ export default {
         userId: user.id,
       });
     },
+    recipes: async (user, args, { models }) => {
+      return await models.Recipes.find({
+        userId: user.id,
+      });
+    },
   },
 };

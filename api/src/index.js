@@ -94,6 +94,7 @@ connectDb().then(async () => {
   await Promise.all([
     models.User.deleteMany({}),
     models.Message.deleteMany({}),
+    models.Recipe.deleteMany({}),
   ]);
   console.log('seed');
   createUsersWithMessages(new Date());
@@ -105,36 +106,42 @@ connectDb().then(async () => {
 
 const createUsersWithMessages = async date => {
   const user1 = new models.User({
-    username: 'rwieruch',
-    email: 'hello@robin.com',
-    password: 'rwieruch',
+    username: 'gert',
+    email: 'jeggert@jeggert.com',
+    password: 'cash1234',
     role: 'ADMIN',
   });
 
   const user2 = new models.User({
-    username: 'ddavids',
-    email: 'hello@david.com',
-    password: 'ddavids',
+    username: 'user2',
+    email: 'eggert.jason+recipeUser2@gmail.com',
+    password: 'cash1234',
   });
 
-  const recipe1 = new models.Message({
+  const message1 = new models.Message({
     text: '3 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
-    userId: user2.id,
+    userId: user1.id,
   });
 
-  const recipe2 = new models.Message({
+  const recipe1 = new models.Recipe ({
     text: '3 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
-    userId: user2.id,
+    userId: user1.id,
   });
 
-  const recipe3 = new models.Message({
+  const recipe2 = new models.Recipe ({
     text: '3 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
-    userId: user2.id,
+    userId: user1.id,
   });
 
+  const recipe3 = new models.Recipe ({
+    text: '3 sticks of butter',
+    createdAt: date.setSeconds(date.getSeconds() + 1),
+    userId: user1.id,
+  });
+  await message1.save();
   await recipe1.save();
   await recipe2.save();
   await recipe3.save();
