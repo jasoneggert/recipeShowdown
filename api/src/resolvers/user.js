@@ -48,7 +48,7 @@ export default {
       { login, password },
       { models, secret },
     ) => {
-      console.log('login: ', login);
+      console.log('login: ');
       const user = await models.User.findByLogin(login);
 
       if (!user) {
@@ -99,7 +99,7 @@ export default {
       });
     },
     recipes: async (user, args, { models }) => {
-      return await models.Recipes.find({
+      return await models.Recipe.find({
         userId: user.id,
       });
     },

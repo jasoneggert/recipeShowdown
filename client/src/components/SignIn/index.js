@@ -38,13 +38,16 @@ class SignInForm extends Component {
 
   onSubmit = (event, signIn) => {
     signIn().then(async ({ data }) => {
+      console.log('data: ', data);
+      console.log('wha', event, signIn)
       this.setState({ ...INITIAL_STATE });
 
       localStorage.setItem('token', data.signIn.token);
-
+    
       await this.props.refetch();
-
       this.props.history.push(routes.LANDING);
+
+   
     });
 
     event.preventDefault();

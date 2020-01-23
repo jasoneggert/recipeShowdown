@@ -8,10 +8,10 @@ import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-
+import { Grommet } from 'grommet';
 import App from './components/App';
 import { signOut } from './components/SignOut';
-
+import { darkTheme } from './darkTheme';
 const httpLink = new HttpLink({
   uri: 'http://localhost:8008/graphql',
 });
@@ -78,8 +78,10 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <Grommet theme={darkTheme}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Grommet>,
   document.getElementById('root'),
 );
