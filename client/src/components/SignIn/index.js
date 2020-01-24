@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { SignUpLink } from '../SignUp';
 import * as routes from '../../constants/routes';
 import ErrorMessage from '../Error';
+import { Box, Button, TextInput } from 'grommet';
 
 const SIGN_IN = gql`
   mutation($login: String!, $password: String!) {
@@ -39,15 +40,13 @@ class SignInForm extends Component {
   onSubmit = (event, signIn) => {
     signIn().then(async ({ data }) => {
       console.log('data: ', data);
-      console.log('wha', event, signIn)
+      console.log('wha', event, signIn);
       this.setState({ ...INITIAL_STATE });
 
       localStorage.setItem('token', data.signIn.token);
-    
+
       await this.props.refetch();
       this.props.history.push(routes.LANDING);
-
-   
     });
 
     event.preventDefault();
@@ -62,23 +61,53 @@ class SignInForm extends Component {
       <Mutation mutation={SIGN_IN} variables={{ login, password }}>
         {(signIn, { data, loading, error }) => (
           <form onSubmit={event => this.onSubmit(event, signIn)}>
-            <input
-              name="login"
-              value={login}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Email or Username"
-            />
-            <input
-              name="password"
-              value={password}
-              onChange={this.onChange}
-              type="password"
-              placeholder="Password"
-            />
-            <button disabled={isInvalid || loading} type="submit">
-              Sign In
-            </button>
+            <Box
+              direction="column"
+              pad={{
+                left: 'small ',
+                right: 'small',
+                vertical: 'small',
+              }}
+              style={{ zIndex: '1' }}
+            >
+              <TextInput
+                name="login"
+                value={login}
+                onChange={this.onChange}
+                type="text"
+                placeholder="Email or Username"
+              />
+            </Box>
+            <Box
+              direction="column"
+              pad={{
+                left: 'small ',
+                right: 'small',
+                vertical: 'small',
+              }}
+              style={{ zIndex: '1' }}
+            >
+              <TextInput
+                name="password"
+                value={password}
+                onChange={this.onChange}
+                type="password"
+                placeholder="Password"
+              />
+            </Box>
+            <Box
+              direction="column"
+              pad={{
+                left: 'small ',
+                right: 'small',
+                vertical: 'small',
+              }}
+              style={{ zIndex: '1' }}
+            >
+              <Button plain={false} fill={'horizontal'} type="submit">
+                Sign In
+              </Button>
+            </Box>
 
             {error && <ErrorMessage error={error} />}
           </form>

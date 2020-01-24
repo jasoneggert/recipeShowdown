@@ -3,47 +3,56 @@ import { Link } from 'react-router-dom';
 
 import * as routes from '../../constants/routes';
 import SignOutButton from '../SignOut';
+import { Anchor, Box, DropButton } from 'grommet';
 
 const Navigation = ({ session }) => (
-  <div>
-    {session && session.me ? (
-      <NavigationAuth session={session} />
-    ) : (
-      <NavigationNonAuth />
-    )}
-  </div>
+  <Box pad="large" background="background" fill={true}>
+    <DropButton
+      color={'accent-2'}
+      label="Navigation"
+      dropAlign={{ top: 'bottom', left: 'left' }}
+      dropContent={
+        session && session.me ? (
+          <NavigationAuth session={session} />
+        ) : (
+          <NavigationNonAuth />
+        )
+      }
+    />
+  </Box>
 );
 
 const NavigationAuth = ({ session }) => (
-  <ul>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={routes.ACCOUNT}>Account ({session.me.username})</Link>
-    </li>
-    {session &&
-      session.me &&
-      session.me.role === 'ADMIN' && (
+  <Box pad="small" background="background">
+    <ul>
+      <li>
+        <Anchor href={routes.LANDING} color={'#CEFF1A'}>
+          Landing
+        </Anchor>
+      </li>
+      <li>
+        <Anchor href={routes.ACCOUNT} color={'#CEFF1A'}>
+          Account ({session.me.username})
+        </Anchor>
+      </li>
+      {session && session.me && session.me.role === 'ADMIN' && (
         <li>
-          <Link to={routes.ADMIN}>Admin</Link>
+          <Anchor  href={routes.ADMIN} color={'#CEFF1A'}>Admin</Anchor>
         </li>
       )}
-    <li>
-      <SignOutButton />
-    </li>
-  </ul>
+      <li>
+        <SignOutButton />
+      </li>
+    </ul>
+  </Box>
 );
 
 const NavigationNonAuth = () => (
-  <ul>
-    <li>
-      <Link to={routes.SIGN_IN}>Sign In</Link>
-    </li>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-  </ul>
+  <Box pad="large" background="background">
+    <Anchor href={routes.SIGN_IN} color={'#CEFF1A'}>Sign In</Anchor>
+
+    <Anchor href={routes.LANDING} color={'#CEFF1A'}>Landing</Anchor>
+  </Box>
 );
 
 export default Navigation;
