@@ -7,7 +7,7 @@ export default gql`
   }
 
   extend type Mutation {
-    createRecipe(text: String!): Recipe!
+    createRecipe(data: RecipeInput!): Recipe!
     deleteRecipe(id: ID!): Boolean!
   }
 
@@ -23,9 +23,53 @@ export default gql`
 
   type Recipe {
     id: ID!
-    text: String!
+    name: String
+    ingredients: [Ingredient]
+    preperation: [PrepStep]
     createdAt: Date!
     user: User!
+    text: String
+  }
+  
+  input RecipeInput {
+    name: String
+    ingredients: [IngredientInput]
+    preperation: [PrepStepInput]
+  }
+
+  type Ingredient {
+    id: ID!
+    value: Float
+    measurement: Measurement
+    name: String!
+  }
+
+  input IngredientInput {
+    value: Float
+    measurement: Measurement
+    name: String!
+  }
+
+  type PrepStep {
+    id: ID!
+    ordinal: Int
+    step: String
+  }
+
+  input PrepStepInput {
+    ordinal: Int
+    step: String
+  }
+
+  enum Measurement {
+    CUP
+    TABLESPOON
+    TEASPOON
+    OUNCE
+    FLUID_OUNCES
+    MILLITERS
+    QUART
+    GALLON
   }
 
   extend type Subscription {

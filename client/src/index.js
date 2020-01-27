@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { getMainDefinition } from 'apollo-utilities';
 import { ApolloLink, split } from 'apollo-link';
@@ -9,8 +9,8 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Grommet } from 'grommet';
-import App from './components/App';
-import { signOut } from './components/SignOut';
+import App from './pages/App';
+import { signOut } from './pages/SignOut';
 import { customDarkTheme } from './darkTheme';
 const httpLink = new HttpLink({
   uri: 'http://localhost:8008/graphql',
