@@ -48,9 +48,9 @@ export default {
   Mutation: {
     createRecipe: combineResolvers(
       isAuthenticated,
-      async (parent, { text }, { models, me }) => {
+      async (parent, { data }, { models, me }) => {
         const recipe = await models.Recipe.create({
-          text,
+          ...data,
           userId: me.id,
         });
 

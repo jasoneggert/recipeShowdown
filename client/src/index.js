@@ -76,7 +76,6 @@ const client = new ApolloClient({
   link,
   cache,
 });
-console.log(customDarkTheme);
 ReactDOM.render(
   <Grommet theme={customDarkTheme}>
     <ApolloProvider client={client}>

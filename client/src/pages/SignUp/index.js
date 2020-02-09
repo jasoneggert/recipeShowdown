@@ -34,7 +34,7 @@ const SignUpForm = ({ history, refetch }) => {
     setState,
   ] = useState(INITIAL_STATE);
 
-  const [signIn, data, loading, error] = useMutation(SIGN_UP);
+  const [signUp, data, loading, error] = useMutation(SIGN_UP);
 
   const clearState = () => {
     setState({ ...INITIAL_STATE });
@@ -61,7 +61,6 @@ const SignUpForm = ({ history, refetch }) => {
     password === '' ||
     email === '' ||
     username === '';
-  const [signUp] = useMutation(SIGN_UP);
   return (
     <form onSubmit={event => onSubmit(event, signUp)}>
       <input

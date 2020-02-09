@@ -96,7 +96,6 @@ connectDb().then(async () => {
     models.Message.deleteMany({}),
     models.Recipe.deleteMany({}),
   ]);
-  console.log('seed');
   createUsersWithMessages(new Date());
 
   httpServer.listen({ port }, () => {
@@ -119,25 +118,25 @@ const createUsersWithMessages = async date => {
   });
 
   const message1 = new models.Message({
-    text: '3 sticks of butter',
+    name: '1 stick of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     userId: user1.id,
   });
 
   const recipe1 = new models.Recipe ({
-    text: '3 sticks of butter',
+    name: '2 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     userId: user1.id,
   });
 
   const recipe2 = new models.Recipe ({
-    text: '3 sticks of butter',
+    name: '3 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     userId: user1.id,
   });
 
   const recipe3 = new models.Recipe ({
-    text: '3 sticks of butter',
+    name: '3 sticks of butter',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     userId: user1.id,
   });

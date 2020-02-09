@@ -5,7 +5,8 @@ import gql from 'graphql-tag';
 import { SignUpLink } from '../SignUp';
 import * as routes from '../../constants/routes';
 import ErrorMessage from '../Error';
-import { Box, Button, TextInput } from 'grommet';
+import { Button, TextInput } from 'grommet';
+import { StandardBox } from '../../lib/boxes';
 
 const SIGN_IN = gql`
   mutation($login: String!, $password: String!) {
@@ -34,7 +35,6 @@ const SignInForm = ({ history, refetch }) => {
   const onChange = e => {
     const { name, value } = e.target;
     setState(prevState => ({ ...prevState, [name]: value }));
-    console.log(name, value, 'state', login, password);
   };
 
   const clearState = () => {
@@ -43,6 +43,7 @@ const SignInForm = ({ history, refetch }) => {
 
   const onSubmit = (event, signIn) => {
     localStorage.removeItem('token');
+    console.log(login, password);
     signIn({ variables: { login: login, password: password } }).then(
       async ({ data }) => {
         clearState();
@@ -56,59 +57,42 @@ const SignInForm = ({ history, refetch }) => {
   };
 
   const isInvalid = password === '' || login === '';
-  const [signIn, data, loading, error] = useMutation(SIGN_IN);
+  const [signIn, error] = useMutation(SIGN_IN);
   return (
-    <form onSubmit={event => onSubmit(event, signIn)}>
-      <Box
-        direction="column"
-        pad={{
-          left: 'small ',
-          right: 'small',
-          vertical: 'small',
-        }}
-        style={{ zIndex: '1' }}
-      >
+    <React.Fragment>
+      {StandardBox(
         <TextInput
           name="login"
           value={login}
           onChange={onChange}
           type="text"
           placeholder="Email or Username"
-        />
-      </Box>
-      <Box
-        direction="column"
-        pad={{
-          left: 'small ',
-          right: 'small',
-          vertical: 'small',
-        }}
-        style={{ zIndex: '1' }}
-      >
+        />,
+      )}
+
+      {StandardBox(
         <TextInput
           name="password"
           value={password}
           onChange={onChange}
           type="password"
           placeholder="Password"
-        />
-      </Box>
-      <Box
-        direction="column"
-        pad={{
-          left: 'small ',
-          right: 'small',
-          vertical: 'small',
-        }}
-        style={{ zIndex: '1' }}
-      >
-        <Button plain={false} fill={'horizontal'} type="submit">
+        />,
+      )}
+
+      {StandardBox(
+        <Button
+          plain={false}
+          fill={'horizontal'}
+          type="submit"
+          onClick={e => onSubmit(e, signIn)}
+        >
           Sign In
-        </Button>
-      </Box>
+        </Button>,
+      )}
 
       {error && <ErrorMessage error={error} />}
-    </form>
+    </React.Fragment>
   );
 };
 

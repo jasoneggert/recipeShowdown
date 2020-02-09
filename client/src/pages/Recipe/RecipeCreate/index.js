@@ -2,28 +2,18 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Box, Button, TextInput } from 'grommet';
-
+import styled from 'styled-components';
 const CREATE_RECIPE = gql`
   mutation($data: RecipeInput!) {
     createRecipe(data: $data) {
-      id
       name
-      ingredients {
-        value
-        measurement
-        name
-      }
-      preperation {
-        ordinal
-        step
-      }
-      createdAt
-      user {
-        id
-        username
-      }
     }
   }
+`;
+
+const Ingredients = styled.div`
+  padding: 20px 0;
+  margin: 20px 0;
 `;
 
 const RecipeCreate = () => {
@@ -34,6 +24,17 @@ const RecipeCreate = () => {
   const [createRecipe] = useMutation(CREATE_RECIPE);
   const onNameChange = e => {
     setName(e.target.value);
+    console.log(name);
+  };
+  const addIngredient = ({ value, measurment, name }) => {
+    const newIngredients = [...ingredients];
+    newIngredients.push({ value, measurment, name });
+    setIngredients(newIngredients);
+  };
+  const addPrepStep = ({ step }) => {
+    const newPreperation = [...preperation];
+    newPreperation.push({ step });
+    setPreperation(newPreperation);
   };
 
   return (
@@ -50,11 +51,28 @@ const RecipeCreate = () => {
         <TextInput
           name="recipeName"
           value={name}
-          onChange={onNameChange}
+          onChange={e => onNameChange(e)}
           type="string"
           placeholder="Name"
         />
       </Box>
+      <Ingredients>
+        
+        <Button
+          plain={false}
+          onClick={() =>
+            addIngredient({ variables: { data: { name: name } } })
+          }
+        >
+          Add Ingredient
+        </Button>
+      </Ingredients>
+      <Button
+        plain={false}
+        onClick={() => addPrepStep(1, 'CUP', 'vinegar')}
+      >
+        Add Prep Step
+      </Button>
       <Button
         plain={false}
         onClick={() =>
@@ -66,73 +84,5 @@ const RecipeCreate = () => {
     </React.Fragment>
   );
 };
-
-// class RecipeCreate extends Component {
-//   state = {
-//     text: '',
-//   };
-
-//   onChange = event => {
-//     const { name, value } = event.target;
-//     this.setState({ [name]: value });
-//   };
-
-//   onSubmit = async (event, createRecipe) => {
-//     event.preventDefault();
-
-//     try {
-//       await createRecipe();
-//       this.setState({ text: '' });
-//     } catch (error) {}
-//   };
-
-//   render() {
-//     const { text } = this.state;
-//     console.log('text: ', text);
-
-//     return (
-//       <Mutation
-//         mutation={CREATE_RECIPE}
-//         variables={{ text }}
-//         // Not used anymore because of Subscription
-
-//           // update={(cache, { data: { createMessage } }) => {
-//           //   const data = cache.readQuery({
-//           //     query: GET_ALL_MESSAGES_WITH_USERS,
-//           //   });
-
-//           //   cache.writeQuery({
-//           //     query: GET_ALL_MESSAGES_WITH_USERS,
-//           //     data: {
-//           //       ...data,
-//           //       messages: {
-//           //         ...data.messages,
-//           //         edges: [createMessage, ...data.messages.edges],
-//           //         pageInfo: data.messages.pageInfo,
-//           //       },
-//           //     },
-//           //   });
-//           // }}
-//       >
-//         {(createRecipe, { data, loading, error }) => (
-//           <form
-//             onSubmit={event => this.onSubmit(event, createRecipe)}
-//           >
-//             <textarea
-//               name="text"
-//               value={text}
-//               onChange={this.onChange}
-//               type="text"
-//               placeholder="Your recipe ..."
-//             />
-//             <Button plain={false} type="submit">Send</Button>
-
-//             {error && <ErrorMessage error={error} />}
-//           </form>
-//         )}
-//       </Mutation>
-//     );
-//   }
-// }
 
 export default RecipeCreate;

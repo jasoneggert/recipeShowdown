@@ -24,8 +24,13 @@ const NavigationAuth = ({ session }) => (
   <Box pad="small" background="background">
     <ul>
       <li>
-        <Anchor href={routes.LANDING} color={'#CEFF1A'}>
-          Landing
+        <Anchor href={routes.RECIPES} color={'#CEFF1A'}>
+          Recipes
+        </Anchor>
+      </li>
+      <li>
+        <Anchor href={routes.CREATERECIPE} color={'#CEFF1A'}>
+          Create Recipe
         </Anchor>
       </li>
       <li>
@@ -35,7 +40,9 @@ const NavigationAuth = ({ session }) => (
       </li>
       {session && session.me && session.me.role === 'ADMIN' && (
         <li>
-          <Anchor  href={routes.ADMIN} color={'#CEFF1A'}>Admin</Anchor>
+          <Anchor href={routes.ADMIN} color={'#CEFF1A'}>
+            Admin
+          </Anchor>
         </li>
       )}
       <li>
@@ -47,9 +54,19 @@ const NavigationAuth = ({ session }) => (
 
 const NavigationNonAuth = () => (
   <Box pad="large" background="background">
-    <Anchor href={routes.SIGN_IN} color={'#CEFF1A'}>Sign In</Anchor>
-
-    <Anchor href={routes.LANDING} color={'#CEFF1A'}>Landing</Anchor>
+    <Anchor href={routes.SIGN_IN} color={'#CEFF1A'}>
+      Sign In
+    </Anchor>
+    <li>
+      <Anchor href={routes.RECIPES} color={'#CEFF1A'}>
+        Recipes
+      </Anchor>
+    </li>
+    <li>
+      <Anchor href={routes.CREATERECIPE} color={'#CEFF1A'}>
+        Create Recipe
+      </Anchor>
+    </li>{' '}
   </Box>
 );
 

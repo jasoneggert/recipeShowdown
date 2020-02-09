@@ -10,6 +10,7 @@ import withSession from '../Session/withSession';
 import * as routes from '../../constants/routes';
 import history from '../../constants/history';
 import { Box } from 'grommet';
+import { RecipeCreate, Recipes } from '../Recipe';
 
 const App = ({ session, refetch }) => (
   <Router history={history}>
@@ -50,6 +51,16 @@ const App = ({ session, refetch }) => (
           fill={true}
         >
           <Switch>
+            <Route
+              exact
+              path={routes.CREATERECIPE}
+              component={() => <RecipeCreate />}
+            />
+            <Route
+              exact
+              path={routes.RECIPES}
+              component={() => <Recipes limit={25}/>}
+            />
             <Route
               exact
               path={routes.LANDING}

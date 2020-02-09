@@ -1,7 +1,7 @@
 import React from 'react';
 import withSession from '../Session/withSession';
 import { Box } from 'grommet';
-import { RecipeCreate } from '../Recipe';
+import { RecipeCreate, Recipes } from '../Recipe';
 const Landing = ({ session }) => (
   <Box
     background={'black'}
@@ -22,7 +22,6 @@ const Landing = ({ session }) => (
     <h2>Recipes</h2>
 
     {session && session.me && <RecipeCreate />}
-    <Recipes />
   </Box>
 );
 

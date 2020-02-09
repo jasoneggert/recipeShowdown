@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-
+import { LeftAlignBox } from '../../../lib/boxes';
 // import MessageDelete from '../MessageDelete';
 import Loading from '../../Loading';
 import withSession from '../../Session/withSession';
@@ -10,7 +11,7 @@ const RECIPE_CREATED = gql`
     recipeCreated {
       recipe {
         id
-        text
+
         createdAt
         user {
           id
@@ -24,10 +25,10 @@ const RECIPE_CREATED = gql`
 const GET_PAGINATED_RECIPES_WITH_USERS = gql`
   query($cursor: String, $limit: Int!) {
     recipes(cursor: $cursor, limit: $limit)
-      @connection(key: "MessagesConnection") {
+      @connection(key: "RecipeConnection") {
       edges {
         id
-        text
+        name
         createdAt
         user {
           id
@@ -45,19 +46,33 @@ const GET_PAGINATED_RECIPES_WITH_USERS = gql`
 const Recipes = ({ limit }) => {
   const { loading, error, data, subscribeToMore, refetch } = useQuery(
     GET_PAGINATED_RECIPES_WITH_USERS,
+    {
+      variables: { limit: limit },
+    },
   );
-  return recipes.map(recipe => (
-    <RecipeItem key={recipe.id} recipe={recipe} />
-  ));
-}
+  console.log('data: ', data);
+  if (loading) {
+    return <span>Loading</span>;
+  }
+  if (!data) {
+    return <span>No Recipes</span>;
+  }
+  return LeftAlignBox(
+    data.recipes.edges.map(recipe => {
+      console.log('recipe: ', recipe);
+      return <RecipeItem key={recipe.id} recipe={recipe} />;
+    }),
+  );
+};
 
-const RecipeItemBase = ({ recipe, session }) => (
-  <div>
-    {recipe.user && <h3>{recipe.user.username}</h3>}
-    <small>{recipe.createdAt}</small>
-    <p>{recipe.name}</p>
-  </div>
-);
+const RecipeItemBase = ({ recipe, session }) =>
+  LeftAlignBox(
+    <div>
+      <h3>{recipe.name}</h3>
+      <div>{recipe.createdAt}</div>
+      {recipe.user && <div>{recipe.user.username}</div>}
+    </div>,
+  );
 
 const RecipeItem = withSession(RecipeItemBase);
 

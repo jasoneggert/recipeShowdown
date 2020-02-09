@@ -28,7 +28,6 @@ export default gql`
     preperation: [PrepStep]
     createdAt: Date!
     user: User!
-    text: String
   }
   
   input RecipeInput {
@@ -37,40 +36,7 @@ export default gql`
     preperation: [PrepStepInput]
   }
 
-  type Ingredient {
-    id: ID!
-    value: Float
-    measurement: Measurement
-    name: String!
-  }
 
-  input IngredientInput {
-    value: Float
-    measurement: Measurement
-    name: String!
-  }
-
-  type PrepStep {
-    id: ID!
-    ordinal: Int
-    step: String
-  }
-
-  input PrepStepInput {
-    ordinal: Int
-    step: String
-  }
-
-  enum Measurement {
-    CUP
-    TABLESPOON
-    TEASPOON
-    OUNCE
-    FLUID_OUNCES
-    MILLITERS
-    QUART
-    GALLON
-  }
 
   extend type Subscription {
     recipeCreated: RecipeCreated!

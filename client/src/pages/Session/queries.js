@@ -9,7 +9,7 @@ export const GET_ME = gql`
       role
       recipes {
         id
-        text
+        name
       }
     }
   }

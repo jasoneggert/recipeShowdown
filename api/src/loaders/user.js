@@ -4,6 +4,7 @@ export const batchUsers = async (keys, models) => {
       $in: keys,
     },
   });
+  console.log(keys);
 
   return keys.map(key => users.find(user => user.id == key));
 };

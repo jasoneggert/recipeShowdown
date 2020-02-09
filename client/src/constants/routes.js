@@ -3,4 +3,5 @@ export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
-export const RECIPE = '/recipe'
+export const CREATERECIPE = '/create-recipe'
+export const RECIPES = '/recipes'
