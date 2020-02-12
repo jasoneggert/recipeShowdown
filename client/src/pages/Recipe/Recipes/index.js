@@ -11,7 +11,7 @@ const RECIPE_CREATED = gql`
     recipeCreated {
       recipe {
         id
-
+        
         createdAt
         user {
           id

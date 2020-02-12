@@ -48,3 +48,19 @@ export const ColumnBox = children => (
     {children}
   </Box>
 );
+
+export const RowBox = children => (
+  <Box
+    align={'start'}
+    direction="row"
+    pad={{
+      left: 'large',
+      right: 'large',
+      vertical: 'small',
+    }}
+    style={{ zIndex: '1' }}
+    fill={true}
+  >
+    {children}
+  </Box>
+);

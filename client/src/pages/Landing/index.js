@@ -7,7 +7,7 @@ const Landing = ({ session }) => (
     background={'black'}
     animation={'fadeIn'}
     direction="column"
-    align="left"
+    align="start"
     justify="between"
     pad={{
       left: 'small',

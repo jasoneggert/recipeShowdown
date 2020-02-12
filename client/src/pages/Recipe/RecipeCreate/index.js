@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { Box, Button, TextInput } from 'grommet';
+import { Box, Button, Select, TextInput } from 'grommet';
 import styled from 'styled-components';
+import { LeftAlignBox, RowBox } from '../../../lib/boxes';
 const CREATE_RECIPE = gql`
   mutation($data: RecipeInput!) {
     createRecipe(data: $data) {
@@ -11,7 +12,7 @@ const CREATE_RECIPE = gql`
   }
 `;
 
-const Ingredients = styled.div`
+const PaddedMarginDiv = styled.div`
   padding: 20px 0;
   margin: 20px 0;
 `;
@@ -37,36 +38,39 @@ const RecipeCreate = () => {
     setPreperation(newPreperation);
   };
 
-  return (
+  return LeftAlignBox(
     <React.Fragment>
-      <Box
-        direction="column"
-        pad={{
-          left: 'small ',
-          right: 'small',
-          vertical: 'small',
-        }}
-        style={{ zIndex: '1' }}
-      >
-        <TextInput
-          name="recipeName"
-          value={name}
-          onChange={e => onNameChange(e)}
-          type="string"
-          placeholder="Name"
-        />
-      </Box>
-      <Ingredients>
-        
+      <TextInput
+        name="recipeName"
+        value={name}
+        onChange={e => onNameChange(e)}
+        type="string"
+        placeholder="Name"
+      />
+      <PaddedMarginDiv>
         <Button
           plain={false}
-          onClick={() =>
-            addIngredient({ variables: { data: { name: name } } })
-          }
+          onClick={() => {
+            setIngredients([...ingredients, { name: 'name' }]);
+            console.log('ingredients: ', ingredients);
+          }}
         >
           Add Ingredient
         </Button>
-      </Ingredients>
+        <div>
+          {ingredients.map((ingredient, i) =>
+            RowBox(
+              <Fragment>
+                <div>{ingredient.name}</div>
+                <Select
+                  options={['small', 'medium', 'large']}
+                  value={'small'}
+                />
+              </Fragment>,
+            ),
+          )}
+        </div>
+      </PaddedMarginDiv>
       <Button
         plain={false}
         onClick={() => addPrepStep(1, 'CUP', 'vinegar')}
@@ -81,7 +85,7 @@ const RecipeCreate = () => {
       >
         Save Recipe
       </Button>
-    </React.Fragment>
+    </React.Fragment>,
   );
 };
 
