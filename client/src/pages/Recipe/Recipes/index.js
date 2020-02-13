@@ -11,7 +11,7 @@ const RECIPE_CREATED = gql`
     recipeCreated {
       recipe {
         id
-        
+
         createdAt
         user {
           id
@@ -30,6 +30,11 @@ const GET_PAGINATED_RECIPES_WITH_USERS = gql`
         id
         name
         createdAt
+        ingredients {
+          name
+          value
+          measurement
+        }
         user {
           id
           username
@@ -70,6 +75,13 @@ const RecipeItemBase = ({ recipe, session }) =>
     <div>
       <h3>{recipe.name}</h3>
       <div>{recipe.createdAt}</div>
+      {recipe.ingredients.map(ingredient => (
+        <div>
+        <span>{ingredient.value}</span>
+        <span>{ingredient.measurement}</span>
+        <span>{ingredient.name}</span>
+        </div>
+      ))}
       {recipe.user && <div>{recipe.user.username}</div>}
     </div>,
   );

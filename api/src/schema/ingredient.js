@@ -15,12 +15,12 @@ export default gql`
   }
   enum Measurement {
     CUP
-    TABLESPOON
-    TEASPOON
-    OUNCE
-    FLUID_OUNCES
-    MILLITERS
-    QUART
-    GALLON
+    OZ
+    TBSP
+    TSP
+    PT
+    QT
+    GAL
+    NONE
   }
 `;

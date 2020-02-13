@@ -27,11 +27,26 @@ const RecipeCreate = () => {
     setName(e.target.value);
     console.log(name);
   };
-  const addIngredient = ({ value, measurment, name }) => {
+
+  const onIngredientNameChange = (i, e) => {
     const newIngredients = [...ingredients];
-    newIngredients.push({ value, measurment, name });
+    newIngredients[i].name = e.target.value;
     setIngredients(newIngredients);
   };
+
+  const onIngredientValueChange = (i, e) => {
+    const newIngredients = [...ingredients];
+    newIngredients[i].value = parseInt(e.target.value);
+    setIngredients(newIngredients);
+  };
+
+  const onIngredientMeasurementSelect = (i, e) => {
+    console.log('wut', e);
+    const newIngredients = [...ingredients];
+    newIngredients[i].measurement = e.value;
+    setIngredients(newIngredients);
+  };
+
   const addPrepStep = ({ step }) => {
     const newPreperation = [...preperation];
     newPreperation.push({ step });
@@ -51,7 +66,7 @@ const RecipeCreate = () => {
         <Button
           plain={false}
           onClick={() => {
-            setIngredients([...ingredients, { name: 'name' }]);
+            setIngredients([...ingredients, { name: '' }]);
             console.log('ingredients: ', ingredients);
           }}
         >
@@ -61,10 +76,36 @@ const RecipeCreate = () => {
           {ingredients.map((ingredient, i) =>
             RowBox(
               <Fragment>
-                <div>{ingredient.name}</div>
+                <TextInput
+                  name="ingredi amount"
+                  value={ingredient.value}
+                  onChange={e => onIngredientValueChange(i, e)}
+                  type="number"
+                  placeholder=""
+                />
                 <Select
-                  options={['small', 'medium', 'large']}
-                  value={'small'}
+                  options={[
+                    'CUP',
+                    'OZ',
+                    'TBSP',
+                    'TSP',
+                    'PT',
+                    'QT',
+                    'GAL',
+                  ]}
+                  value={
+                    ingredient.measurement
+                      ? ingredient.measurement
+                      : 'choose'
+                  }
+                  onChange={e => onIngredientMeasurementSelect(i, e)}
+                />
+                <TextInput
+                  name="ingredientname"
+                  value={ingredient.name}
+                  onChange={e => onIngredientNameChange(i, e)}
+                  type="string"
+                  placeholder=""
                 />
               </Fragment>,
             ),
@@ -80,7 +121,11 @@ const RecipeCreate = () => {
       <Button
         plain={false}
         onClick={() =>
-          createRecipe({ variables: { data: { name: name } } })
+          createRecipe({
+            variables: {
+              data: { name: name, ingredients: ingredients },
+            },
+          })
         }
       >
         Save Recipe
