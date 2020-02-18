@@ -1,9 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
+import { Link, withRouter } from 'react-router-dom';
+
 import gql from 'graphql-tag';
 import { Box, Button, Select, TextInput } from 'grommet';
 import styled from 'styled-components';
 import { LeftAlignBox, RowBox } from '../../../lib/boxes';
+import * as routes from '../../../constants/routes';
+import { Redirect } from 'react-router-dom';
+
 const CREATE_RECIPE = gql`
   mutation($data: RecipeInput!) {
     createRecipe(data: $data) {
@@ -17,7 +22,7 @@ const PaddedMarginDiv = styled.div`
   margin: 20px 0;
 `;
 
-const RecipeCreate = () => {
+const RecipeCreate = ({history, refetch}) => {
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [preperation, setPreperation] = useState([]);
@@ -51,6 +56,17 @@ const RecipeCreate = () => {
     const newPreperation = [...preperation];
     newPreperation.push({ step });
     setPreperation(newPreperation);
+  };
+
+  const createAndGoBack = () => {
+    createRecipe({
+      variables: {
+        data: { name: name, ingredients: ingredients },
+      },
+    }).then(async ({ data }) => {
+      // await refetch();
+      history.push(routes.RECIPES);
+    });
   };
 
   return LeftAlignBox(
@@ -120,13 +136,10 @@ const RecipeCreate = () => {
       </Button>
       <Button
         plain={false}
-        onClick={() =>
-          createRecipe({
-            variables: {
-              data: { name: name, ingredients: ingredients },
-            },
-          })
-        }
+        onClick={() => {
+          createAndGoBack(history, createRecipe);
+          console.log('TCL: history', history);
+        }}
       >
         Save Recipe
       </Button>
@@ -134,4 +147,4 @@ const RecipeCreate = () => {
   );
 };
 
-export default RecipeCreate;
+export default withRouter(RecipeCreate);

@@ -54,7 +54,7 @@ const App = ({ session, refetch }) => (
             <Route
               exact
               path={routes.CREATERECIPE}
-              component={() => <RecipeCreate />}
+              component={() => <RecipeCreate refetch={refetch}/>}
             />
             <Route
               exact
