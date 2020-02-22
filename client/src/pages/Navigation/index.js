@@ -6,7 +6,7 @@ import { Anchor, Box, DropButton } from 'grommet';
 const Navigation = ({ session }) => (
   <Box pad="large" background="background" fill={true}>
     <DropButton
-      color={'accent-2'}
+      color={'accent-1'}
       label="Navigation"
       dropAlign={{ top: 'bottom', left: 'left' }}
       dropContent={
@@ -24,23 +24,23 @@ const NavigationAuth = ({ session }) => (
   <Box pad="small" background="background">
     <ul>
       <li>
-        <Anchor href={routes.RECIPES} color={'#CEFF1A'}>
+        <Anchor href={routes.RECIPES}>
           Recipes
         </Anchor>
       </li>
       <li>
-        <Anchor href={routes.CREATERECIPE} color={'#CEFF1A'}>
+        <Anchor href={routes.CREATERECIPE}>
           Create Recipe
         </Anchor>
       </li>
       <li>
-        <Anchor href={routes.ACCOUNT} color={'#CEFF1A'}>
+        <Anchor href={routes.ACCOUNT}>
           Account ({session.me.username})
         </Anchor>
       </li>
       {session && session.me && session.me.role === 'ADMIN' && (
         <li>
-          <Anchor href={routes.ADMIN} color={'#CEFF1A'}>
+          <Anchor href={routes.ADMIN}>
             Admin
           </Anchor>
         </li>
@@ -54,16 +54,16 @@ const NavigationAuth = ({ session }) => (
 
 const NavigationNonAuth = () => (
   <Box pad="large" background="background">
-    <Anchor href={routes.SIGN_IN} color={'#CEFF1A'}>
+    <Anchor href={routes.SIGN_IN}>
       Sign In
     </Anchor>
     <li>
-      <Anchor href={routes.RECIPES} color={'#CEFF1A'}>
+      <Anchor href={routes.RECIPES}>
         Recipes
       </Anchor>
     </li>
     <li>
-      <Anchor href={routes.CREATERECIPE} color={'#CEFF1A'}>
+      <Anchor href={routes.CREATERECIPE}>
         Create Recipe
       </Anchor>
     </li>{' '}

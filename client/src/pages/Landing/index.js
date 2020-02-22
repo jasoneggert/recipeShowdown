@@ -4,7 +4,7 @@ import { Box } from 'grommet';
 import { RecipeCreate, Recipes } from '../Recipe';
 const Landing = ({ session }) => (
   <Box
-    background={'black'}
+    background={'background'}
     animation={'fadeIn'}
     direction="column"
     align="start"

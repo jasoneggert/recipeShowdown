@@ -5,6 +5,7 @@ import { LeftAlignBox } from '../../../lib/boxes';
 // import MessageDelete from '../MessageDelete';
 import Loading from '../../Loading';
 import withSession from '../../Session/withSession';
+import { motion } from "framer-motion";
 
 const RECIPE_CREATED = gql`
   subscription {
@@ -72,18 +73,10 @@ const Recipes = ({ limit }) => {
 
 const RecipeItemBase = ({ recipe, session }) =>
   LeftAlignBox(
-    <div>
+    <motion.div initial={{scale: 0.3}} animate={{ scale: 1 }} >
       <h3>{recipe.name}</h3>
       <div>{recipe.createdAt}</div>
-      {recipe.ingredients.map(ingredient => (
-        <div>
-        <span>{ingredient.value}</span>
-        <span>{ingredient.measurement}</span>
-        <span>{ingredient.name}</span>
-        </div>
-      ))}
-      {recipe.user && <div>{recipe.user.username}</div>}
-    </div>,
+    </motion.div>
   );
 
 const RecipeItem = withSession(RecipeItemBase);

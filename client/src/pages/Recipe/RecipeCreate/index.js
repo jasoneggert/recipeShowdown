@@ -22,7 +22,7 @@ const PaddedMarginDiv = styled.div`
   margin: 20px 0;
 `;
 
-const RecipeCreate = ({history, refetch}) => {
+const RecipeCreate = ({ history, refetch }) => {
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [preperation, setPreperation] = useState([]);
@@ -80,7 +80,6 @@ const RecipeCreate = ({history, refetch}) => {
       />
       <PaddedMarginDiv>
         <Button
-          plain={false}
           onClick={() => {
             setIngredients([...ingredients, { name: '' }]);
             console.log('ingredients: ', ingredients);
@@ -128,12 +127,7 @@ const RecipeCreate = ({history, refetch}) => {
           )}
         </div>
       </PaddedMarginDiv>
-      <Button
-        plain={false}
-        onClick={() => addPrepStep(1, 'CUP', 'vinegar')}
-      >
-        Add Prep Step
-      </Button>
+      <Button onClick={() => addPrepStep()}>Add Prep Step</Button>
       <Button
         plain={false}
         onClick={() => {

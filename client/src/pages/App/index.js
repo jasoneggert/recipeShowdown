@@ -16,7 +16,7 @@ const App = ({ session, refetch }) => (
   <Router history={history}>
     <React.Fragment>
       <Box
-        background={'black'}
+        background={'background'}
         tag="content"
         animation={'fadeIn'}
         direction="column"
@@ -32,9 +32,10 @@ const App = ({ session, refetch }) => (
         style={{ zIndex: '1' }}
         fill={true}
       >
+        <h1>Recipe DeathMatch</h1>
         <Navigation session={session} />
         <Box
-          background={'black'}
+          background={'background'}
           tag="content"
           animation={'fadeIn'}
           direction="column"

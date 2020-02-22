@@ -11,7 +11,10 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Grommet } from 'grommet';
 import App from './pages/App';
 import { signOut } from './pages/SignOut';
-import { customDarkTheme } from './darkTheme';
+// import { customDarkTheme } from './darkTheme';
+import { hpe } from 'grommet-theme-hpe';
+import { hp } from 'grommet-theme-hp';
+import { mytheme } from './lib/theme';
 const httpLink = new HttpLink({
   uri: 'http://localhost:8008/graphql',
 });
@@ -77,7 +80,7 @@ const client = new ApolloClient({
   cache,
 });
 ReactDOM.render(
-  <Grommet theme={customDarkTheme}>
+  <Grommet theme={mytheme}>
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
