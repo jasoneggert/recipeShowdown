@@ -21,6 +21,7 @@ const app = express();
 app.use(cors());
 
 app.use(morgan('dev'));
+console.log('process.env.DATABASE_URL: ', process.env.DATABASE_URL);
 
 const getMe = async req => {
   const token = req.headers['x-token'];
