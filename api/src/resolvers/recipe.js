@@ -35,7 +35,7 @@ export default {
         pageInfo: {
           hasNextPage,
           endCursor: toCursorHash(
-            edges.lengthth > 0 ? edges[edges.length - 1].createdAt.toString() : Date.now().toString,
+            edges.lengthth > 0 ? edges[edges.length - 1].createdAt.toString() : Date.now().toString(),
           ),
         },
       };

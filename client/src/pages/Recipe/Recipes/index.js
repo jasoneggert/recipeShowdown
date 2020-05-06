@@ -56,7 +56,6 @@ const Recipes = ({ limit }) => {
       variables: { limit: limit },
     },
   );
-  console.log('data: ', data);
   if (loading) {
     return <span>Loading</span>;
   }
