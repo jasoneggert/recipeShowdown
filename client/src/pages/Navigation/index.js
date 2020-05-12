@@ -7,7 +7,7 @@ const Navigation = ({ session }) => (
   <Box pad="large" background="background" fill={true}>
     <DropButton
       color={'accent-1'}
-      label="Navigation"
+      label="Menu"
       dropAlign={{ top: 'bottom', left: 'left' }}
       dropContent={
         session && session.me ? (
