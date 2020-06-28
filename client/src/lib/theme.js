@@ -23,7 +23,7 @@ export const mytheme = {
         dark: '#8C69FF',
         light: '#8C50FF',
       },
-      focus: '#99d5ef',
+      focus: '#b19cd9',
       placeholder: '#AAAAAA',
       selected: 'brand',
       text: {

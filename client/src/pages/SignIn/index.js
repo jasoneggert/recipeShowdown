@@ -7,7 +7,7 @@ import * as routes from '../../constants/routes';
 import ErrorMessage from '../Error';
 import { Button, TextInput } from 'grommet';
 import { StandardBox } from '../../lib/boxes';
-
+import styled from 'styled-components';
 const SIGN_IN = gql`
   mutation($login: String!, $password: String!) {
     signIn(login: $login, password: $password) {
@@ -16,12 +16,16 @@ const SIGN_IN = gql`
   }
 `;
 
+const SignInContainer = styled.div`
+  width: 600px;
+`;
+
 const SignInPage = ({ history, refetch }) => (
-  <div>
+  <SignInContainer>
     <h1>SignIn</h1>
     <SignInForm history={history} refetch={refetch} />
     <SignUpLink />
-  </div>
+  </SignInContainer>
 );
 
 const INITIAL_STATE = {
@@ -32,9 +36,9 @@ const INITIAL_STATE = {
 const SignInForm = ({ history, refetch }) => {
   const [{ login, password }, setState] = useState('');
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setState(prevState => ({ ...prevState, [name]: value }));
+    setState((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const clearState = () => {
@@ -85,7 +89,7 @@ const SignInForm = ({ history, refetch }) => {
           plain={false}
           fill={'horizontal'}
           type="submit"
-          onClick={e => onSubmit(e, signIn)}
+          onClick={(e) => onSubmit(e, signIn)}
         >
           Sign In
         </Button>,

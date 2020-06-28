@@ -4,7 +4,7 @@ import SignOutButton from '../SignOut';
 import { Anchor, Box, DropButton } from 'grommet';
 
 const Navigation = ({ session }) => (
-  <Box pad="large" background="background" fill={true}>
+  <Box pad="none" background="background" fill={true}>
     <DropButton
       color={'accent-1'}
       label="Menu"
@@ -21,7 +21,7 @@ const Navigation = ({ session }) => (
 );
 
 const NavigationAuth = ({ session }) => (
-  <Box pad="small" background="background">
+  <Box pad="large" background="background">
     <ul>
       <li>
         <Anchor href={routes.RECIPES}>

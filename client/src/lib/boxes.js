@@ -2,7 +2,51 @@ import React from 'react';
 
 import { Box } from 'grommet';
 
-export const StandardBox = children => (
+export const MainBox = (children) => (
+  <Box
+    background={'background'}
+    tag="content"
+    animation={'fadeIn'}
+    direction="column"
+    align="center"
+    justify="between"
+    pad={{
+      left: 'large',
+      right: 'large',
+      top: 'small',
+      bottom: 'large',
+    }}
+    elevation="medium"
+    style={{ zIndex: '1' }}
+    fill={true}
+  >
+    {children}
+  </Box>
+);
+
+export const ContentBox = (children) => (
+  <Box
+    background={'background'}
+    tag="content"
+    animation={'fadeIn'}
+    direction="column"
+    align="center"
+    justify="between"
+    pad={{
+      left: 'large',
+      right: 'large',
+      top: 'none',
+      bottom: 'large',
+    }}
+    elevation="none"
+    style={{ zIndex: '1' }}
+    fill={true}
+  >
+    {children}
+  </Box>
+);
+
+export const StandardBox = (children) => (
   <Box
     direction="column"
     pad={{
@@ -16,7 +60,7 @@ export const StandardBox = children => (
   </Box>
 );
 
-export const LeftAlignBox = children => (
+export const LeftAlignBox = (children) => (
   <Box
     align={'start'}
     direction="column"
@@ -32,8 +76,7 @@ export const LeftAlignBox = children => (
   </Box>
 );
 
-
-export const ColumnBox = children => (
+export const ColumnBox = (children) => (
   <Box
     align={'start'}
     direction="column"
@@ -49,7 +92,7 @@ export const ColumnBox = children => (
   </Box>
 );
 
-export const RowBox = children => (
+export const RowBox = (children) => (
   <Box
     align={'start'}
     direction="row"

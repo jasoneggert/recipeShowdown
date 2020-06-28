@@ -11,56 +11,95 @@ import * as routes from '../../constants/routes';
 import history from '../../constants/history';
 import { Box } from 'grommet';
 import { RecipeCreate, Recipes } from '../Recipe';
+import styled from 'styled-components';
+import { skull } from '../../lib/skull';
 
+const MainBox = styled.div`
+  padding: 20px 0;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+`;
+const ContentBox = styled.div`
+  padding: 20px 0;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  width: 600px;
+`;
+const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  width: 600px;
+`;
+
+const Nav = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  width: 400px;
+  margin-left: 150px;
+  position: relative;
+  top: -20px;
+  background: transparent;
+`;
+const Skull = styled.div`
+  height: 90px;
+  width: 60px;
+  margin-right: 20px;
+`;
+const TitleText = styled.div`
+  font-size: 33px;
+  font-family: 'Metric', Arial, sans-serif;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+
+
+const TitleSpan = styled.span`
+  margin-bottom: 10px;
+`;
 const App = ({ session, refetch }) => (
   <Router history={history}>
-    <React.Fragment>
-      <Box
-        background={'background'}
-        tag="content"
-        animation={'fadeIn'}
-        direction="column"
-        align="center"
-        justify="between"
-        pad={{
-          left: 'large',
-          right: 'large',
-          top: 'small',
-          bottom: 'large',
-        }}
-        elevation="medium"
-        style={{ zIndex: '1' }}
-        fill={true}
-      >
-        <h1>Recipe DeathMatch</h1>
-        <Navigation session={session} />
-        <Box
-          background={'background'}
-          tag="content"
-          animation={'fadeIn'}
-          direction="column"
-          align="center"
-          justify="between"
-          pad={{
-            left: 'large',
-            right: 'large',
-            top: 'none',
-            bottom: 'large',
-          }}
-          elevation="none"
-          style={{ zIndex: '1' }}
-          fill={true}
-        >
+    <MainBox>
+      <React.Fragment>
+        <Title>
+          <Skull>{skull()}</Skull>
+          <TitleText>
+            <TitleSpan>The Recipe DeathMatch</TitleSpan>
+            <Navigation session={session} />
+          </TitleText>
+        </Title>
+
+        <ContentBox>
           <Switch>
             <Route
               exact
               path={routes.CREATERECIPE}
-              component={() => <RecipeCreate refetch={refetch}/>}
+              component={() => <RecipeCreate refetch={refetch} />}
             />
             <Route
               exact
               path={routes.RECIPES}
-              component={() => <Recipes limit={25}/>}
+              component={() => <Recipes limit={25} />}
             />
             <Route
               exact
@@ -88,9 +127,9 @@ const App = ({ session, refetch }) => (
               component={() => <AdminPage />}
             />
           </Switch>
-        </Box>
-      </Box>
-    </React.Fragment>
+        </ContentBox>
+      </React.Fragment>
+    </MainBox>
   </Router>
 );
 
