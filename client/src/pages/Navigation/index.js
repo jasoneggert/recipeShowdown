@@ -57,16 +57,6 @@ const NavigationNonAuth = () => (
     <Anchor href={routes.SIGN_IN}>
       Sign In
     </Anchor>
-    <li>
-      <Anchor href={routes.RECIPES}>
-        Recipes
-      </Anchor>
-    </li>
-    <li>
-      <Anchor href={routes.CREATERECIPE}>
-        Create Recipe
-      </Anchor>
-    </li>{' '}
   </Box>
 );
 
