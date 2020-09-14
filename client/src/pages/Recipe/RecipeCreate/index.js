@@ -71,6 +71,7 @@ const RecipeCreate = ({ history, refetch }) => {
 
   return LeftAlignBox(
     <React.Fragment>
+    <h2>Create A Recipe</h2>
       <TextInput
         name="recipeName"
         value={name}
@@ -80,6 +81,7 @@ const RecipeCreate = ({ history, refetch }) => {
       />
       <PaddedMarginDiv>
         <Button
+          plain={false}
           onClick={() => {
             setIngredients([...ingredients, { name: '' }]);
             console.log('ingredients: ', ingredients);
@@ -127,7 +129,7 @@ const RecipeCreate = ({ history, refetch }) => {
           )}
         </div>
       </PaddedMarginDiv>
-      <Button onClick={() => addPrepStep()}>Add Prep Step</Button>
+      <Button plain={false} onClick={() => addPrepStep()}>Add Prep Step</Button>
       <Button
         plain={false}
         onClick={() => {

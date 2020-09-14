@@ -88,7 +88,7 @@ const App = ({ session, refetch }) => (
             <Navigation session={session} />
           </TitleText>
         </Title>
-
+        {session && !session.me && <div>Sign Up And Get Cooking <a href='signup'>Sign Up</a> of if you have and account <a href='signin'>Sign In</a></div>}
         <ContentBox>
           <Switch>
             <Route

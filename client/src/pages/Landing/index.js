@@ -19,7 +19,7 @@ const Landing = ({ session }) => (
     style={{ zIndex: '1' }}
     fill={true}
   >
-    <h2>Recipes</h2>
+    
 
     {session && session.me && <RecipeCreate />}
   </Box>
